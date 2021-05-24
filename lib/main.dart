@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 // ignore: must_be_immutable
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  static const String _phone = 'tel:+54 9 123 456-7890';
+  static const String _mail = 'mailto:loremipsum@gmail.com?subject=MiCard&body=Hello%20World';
+  
+
+  void _launchPhone() async => await canLaunch(_phone) ? await launch(_phone) : throw 'Could not launch $_phone';
+  void _launchMail() async => await canLaunch(_mail) ? await launch(_mail) : throw 'Could not launch $_mail';
+
   Image _profile = Image(
     image: AssetImage('images/st.jpeg'),
   );
@@ -70,6 +84,7 @@ class MyApp extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 100,
                           backgroundImage: _profile.image,
+                          backgroundColor: Colors.teal,
                         ),
                       ),
                     ],
@@ -100,17 +115,29 @@ class MyApp extends StatelessWidget {
                       letterSpacing: 5,
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: SizedBox(
+                      width: 200,
+                      child: Divider(
+                        color: Colors.teal[100],
+                      ),
+                    ),
+                  ),
                   Card(
                     elevation: 4,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0),
                     ),
-                    margin: EdgeInsetsDirectional.fromSTEB(60, 25, 60, 0),
+                    margin: EdgeInsetsDirectional.fromSTEB(60, 0, 60, 0),
                     child: ListTile(
+                      visualDensity: VisualDensity.comfortable,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      onTap: (){},
+                      onTap: (){
+                        _launchPhone();
+                      },
                       leading: Icon(
                         Icons.phone,
                         color: Colors.teal[600],
@@ -131,11 +158,14 @@ class MyApp extends StatelessWidget {
                     ),
                     margin: EdgeInsetsDirectional.fromSTEB(60, 25, 60, 0),
                     child: ListTile(
-                      dense: true,
+                      visualDensity: VisualDensity.comfortable,
+                      dense: false,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      onTap: (){},
+                      onTap: (){
+                        _launchMail();
+                      },
                       leading: Icon(
                         Icons.mail,
                         color: Colors.teal[600],
