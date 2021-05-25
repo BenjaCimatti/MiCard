@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        //backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal,
         body: Stack(
           children: [
             Container(
