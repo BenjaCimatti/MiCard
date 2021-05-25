@@ -27,6 +27,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      color: Colors.teal[600],
+      title: 'MiCard',
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
